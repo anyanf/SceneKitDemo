@@ -9,10 +9,17 @@
 /* Begin PBXBuildFile section */
 		FD151FAB1F41BA880077A3A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD151FAA1F41BA880077A3A2 /* main.m */; };
 		FD151FAE1F41BA880077A3A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD151FAD1F41BA880077A3A2 /* AppDelegate.m */; };
-		FD151FB11F41BA880077A3A2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD151FB01F41BA880077A3A2 /* ViewController.m */; };
-		FD151FB41F41BA880077A3A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD151FB21F41BA880077A3A2 /* Main.storyboard */; };
+		FD151FB11F41BA880077A3A2 /* SceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD151FB01F41BA880077A3A2 /* SceneViewController.m */; };
 		FD151FB61F41BA880077A3A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD151FB51F41BA880077A3A2 /* Assets.xcassets */; };
 		FD151FB91F41BA880077A3A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD151FB71F41BA880077A3A2 /* LaunchScreen.storyboard */; };
+		FD151FC21F41BBA80077A3A2 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD151FC11F41BBA80077A3A2 /* SceneKit.framework */; };
+		FD151FC41F41BC2A0077A3A2 /* ship.scn in Resources */ = {isa = PBXBuildFile; fileRef = FD151FC31F41BC2A0077A3A2 /* ship.scn */; };
+		FD151FCA1F41BE520077A3A2 /* monkey.dae in Resources */ = {isa = PBXBuildFile; fileRef = FD151FC91F41BE520077A3A2 /* monkey.dae */; };
+		FD151FCC1F41BF330077A3A2 /* man.dae in Resources */ = {isa = PBXBuildFile; fileRef = FD151FCB1F41BF330077A3A2 /* man.dae */; };
+		FD6D72901F443527002CED1B /* man11.obj in Resources */ = {isa = PBXBuildFile; fileRef = FD6D728F1F443527002CED1B /* man11.obj */; };
+		FD6D72921F4436F8002CED1B /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = FD6D72911F4436F8002CED1B /* texture.png */; };
+		FD6D72951F45634D002CED1B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D72941F45634D002CED1B /* RootViewController.m */; };
+		FD6D72971F457B3F002CED1B /* house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD6D72961F457B3F002CED1B /* house.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,12 +27,20 @@
 		FD151FAA1F41BA880077A3A2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD151FAC1F41BA880077A3A2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FD151FAD1F41BA880077A3A2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FD151FAF1F41BA880077A3A2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FD151FB01F41BA880077A3A2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		FD151FB31F41BA880077A3A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FD151FAF1F41BA880077A3A2 /* SceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneViewController.h; sourceTree = "<group>"; };
+		FD151FB01F41BA880077A3A2 /* SceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneViewController.m; sourceTree = "<group>"; };
 		FD151FB51F41BA880077A3A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD151FB81F41BA880077A3A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD151FBA1F41BA880077A3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD151FC11F41BBA80077A3A2 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		FD151FC31F41BC2A0077A3A2 /* ship.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ship.scn; sourceTree = "<group>"; };
+		FD151FC91F41BE520077A3A2 /* monkey.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = monkey.dae; sourceTree = "<group>"; };
+		FD151FCB1F41BF330077A3A2 /* man.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = man.dae; sourceTree = "<group>"; };
+		FD6D728F1F443527002CED1B /* man11.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = man11.obj; sourceTree = "<group>"; };
+		FD6D72911F4436F8002CED1B /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
+		FD6D72931F45634D002CED1B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		FD6D72941F45634D002CED1B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		FD6D72961F457B3F002CED1B /* house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = house.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD151FC21F41BBA80077A3A2 /* SceneKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +60,7 @@
 			children = (
 				FD151FA81F41BA880077A3A2 /* SceneKitDemo */,
 				FD151FA71F41BA880077A3A2 /* Products */,
+				FD151FC01F41BBA80077A3A2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,11 +75,18 @@
 		FD151FA81F41BA880077A3A2 /* SceneKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FD151FC31F41BC2A0077A3A2 /* ship.scn */,
+				FD6D72911F4436F8002CED1B /* texture.png */,
+				FD151FC91F41BE520077A3A2 /* monkey.dae */,
+				FD151FCB1F41BF330077A3A2 /* man.dae */,
+				FD6D728F1F443527002CED1B /* man11.obj */,
+				FD6D72961F457B3F002CED1B /* house.jpg */,
 				FD151FAC1F41BA880077A3A2 /* AppDelegate.h */,
 				FD151FAD1F41BA880077A3A2 /* AppDelegate.m */,
-				FD151FAF1F41BA880077A3A2 /* ViewController.h */,
-				FD151FB01F41BA880077A3A2 /* ViewController.m */,
-				FD151FB21F41BA880077A3A2 /* Main.storyboard */,
+				FD6D72931F45634D002CED1B /* RootViewController.h */,
+				FD6D72941F45634D002CED1B /* RootViewController.m */,
+				FD151FAF1F41BA880077A3A2 /* SceneViewController.h */,
+				FD151FB01F41BA880077A3A2 /* SceneViewController.m */,
 				FD151FB51F41BA880077A3A2 /* Assets.xcassets */,
 				FD151FB71F41BA880077A3A2 /* LaunchScreen.storyboard */,
 				FD151FBA1F41BA880077A3A2 /* Info.plist */,
@@ -77,6 +101,14 @@
 				FD151FAA1F41BA880077A3A2 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FD151FC01F41BBA80077A3A2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD151FC11F41BBA80077A3A2 /* SceneKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,7 +142,8 @@
 				TargetAttributes = {
 					FD151FA51F41BA880077A3A2 = {
 						CreatedOnToolsVersion = 8.3.3;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = KYACQ4K486;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -137,9 +170,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD6D72901F443527002CED1B /* man11.obj in Resources */,
+				FD6D72921F4436F8002CED1B /* texture.png in Resources */,
 				FD151FB91F41BA880077A3A2 /* LaunchScreen.storyboard in Resources */,
+				FD6D72971F457B3F002CED1B /* house.jpg in Resources */,
 				FD151FB61F41BA880077A3A2 /* Assets.xcassets in Resources */,
-				FD151FB41F41BA880077A3A2 /* Main.storyboard in Resources */,
+				FD151FCC1F41BF330077A3A2 /* man.dae in Resources */,
+				FD151FCA1F41BE520077A3A2 /* monkey.dae in Resources */,
+				FD151FC41F41BC2A0077A3A2 /* ship.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,8 +188,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD151FB11F41BA880077A3A2 /* ViewController.m in Sources */,
+				FD151FB11F41BA880077A3A2 /* SceneViewController.m in Sources */,
 				FD151FAE1F41BA880077A3A2 /* AppDelegate.m in Sources */,
+				FD6D72951F45634D002CED1B /* RootViewController.m in Sources */,
 				FD151FAB1F41BA880077A3A2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,14 +198,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		FD151FB21F41BA880077A3A2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FD151FB31F41BA880077A3A2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FD151FB71F41BA880077A3A2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -274,10 +305,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KYACQ4K486;
 				INFOPLIST_FILE = SceneKitDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = gome.SceneKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gome.gomeEShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5e6d754e-84f8-42c5-8b4c-45daf7c696ba";
+				PROVISIONING_PROFILE_SPECIFIER = Dev_GM_GomeEShop;
 			};
 			name = Debug;
 		};
@@ -285,10 +320,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KYACQ4K486;
 				INFOPLIST_FILE = SceneKitDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = gome.SceneKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gome.gomeEShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5e6d754e-84f8-42c5-8b4c-45daf7c696ba";
+				PROVISIONING_PROFILE_SPECIFIER = Dev_GM_GomeEShop;
 			};
 			name = Release;
 		};
@@ -311,6 +350,7 @@
 				FD151FBF1F41BA880077A3A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
