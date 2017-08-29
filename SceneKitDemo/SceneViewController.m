@@ -49,11 +49,18 @@
         _scnView.scene = [SCNScene scene];
         
         SCNBox *box = [SCNBox boxWithWidth:10 height:10 length:10 chamferRadius:1];
-        box.firstMaterial.diffuse.contents = [UIImage imageNamed:@"texture"];
-        [_scnView.scene.rootNode addChildNode:[SCNNode nodeWithGeometry:box]];
+        SCNMaterial *redMaterial = [SCNMaterial new];
+        redMaterial.diffuse.contents = [UIColor redColor];
         
-//        _scnView.scene.rootNode.position = SCNVector3Make(0, 0, 0);
-        _scnView.scene.rootNode.opacity = 1.0;
+        SCNMaterial *blueMaterial = [SCNMaterial new];
+        blueMaterial.diffuse.contents = [UIColor blueColor];
+        
+        SCNMaterial *greenMaterial = [SCNMaterial new];
+        greenMaterial.diffuse.contents = [UIColor greenColor];
+        
+        box.materials = @[redMaterial,blueMaterial,redMaterial,blueMaterial,greenMaterial,greenMaterial];
+        
+        [_scnView.scene.rootNode addChildNode:[SCNNode nodeWithGeometry:box]];
         
         // 光
         SCNNode *lightNode = [SCNNode node];
@@ -125,52 +132,77 @@
 //
     _motionManager = [[CMMotionManager alloc]init];
     if (_motionManager.deviceMotionAvailable) {
-        _motionManager.deviceMotionUpdateInterval = 1.0/30;
+        _motionManager.deviceMotionUpdateInterval = 1.0/10;
+        _motionManager.gyroUpdateInterval = 1.0/60;
         [self startDeviceMotionUpdates];
     }
 }
 
 - (void)startDeviceMotionUpdates
 {
-    
-    return;
     _currentMotionY = CGFLOAT_MAX;
     _currentMotionX = CGFLOAT_MAX;
     
     __weak typeof(self) weakSelf = self;
 
-    [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion * _Nullable motion, NSError * _Nullable error) {
+    [_motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMGyroData * _Nullable gyroData, NSError * _Nullable error) {
+        float rotX = gyroData.rotationRate.x/KRotateFactor;
+        float rotY = gyroData.rotationRate.y/KRotateFactor;
     
-        CMAttitude *attitude = motion.attitude;
-        
-        float angleX = -attitude.pitch/M_PI*180/KRotateFactor;
-        float angleY = attitude.roll/M_PI*180/KRotateFactor;
-        // float angleZ = -attitude.yaw/M_PI*180;
-        
-        CGFloat absX = fabs(angleX);
-        CGFloat absY = fabs(angleY);
-        
-        if (_currentMotionX == CGFLOAT_MAX && _currentMotionY == CGFLOAT_MAX)
+        if (fabs(rotX) > fabs(rotY))
         {
-            _currentMotionX = angleX;
-            _currentMotionY = angleY;
-            return ;
-        }
-        
-        if (absX > absY)
-        {
-            CGFloat newAngle = -(angleX - _currentMotionX);
-            _scnView.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(_scnView.scene.rootNode.childNodes.firstObject.transform,newAngle, 1, 0, 0);
+           weakSelf.scnView.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(weakSelf.scnView.scene.rootNode.childNodes.firstObject.transform,rotX, 1, 0, 0);
+
         }
         else
         {
-            CGFloat newAngle = -(angleY - _currentMotionY);
-            _scnView.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(_scnView.scene.rootNode.childNodes.firstObject.transform,newAngle, 0, 1, 0);
+            weakSelf.scnView.scene.rootNode.childNodes.firstObject.pivot = SCNMatrix4Rotate(weakSelf.scnView.scene.rootNode.childNodes.firstObject.pivot,rotY, 0, 1, 0);
         }
-        
-        _currentMotionX = angleX;
-        _currentMotionY = angleY;
-    }];
+
+            }];
+//        CMAttitude *attitude = motion.attitude;
+//
+//        float angleX = -attitude.pitch/M_PI*180/KRotateFactor;
+//        float angleY = attitude.roll/M_PI*180/KRotateFactor;
+//        // float angleZ = -attitude.yaw/M_PI*180;
+//
+//        CGFloat absX = fabs(angleX);
+//        CGFloat absY = fabs(angleY);
+//
+//        if (weakSelf.currentMotionX == CGFLOAT_MAX && weakSelf.currentMotionY == CGFLOAT_MAX)
+//        {
+//            weakSelf.currentMotionX = angleX;
+//            weakSelf.currentMotionY = angleY;
+//            return ;
+//        }
+//
+//        float graX = fabs(motion.gravity.x);
+//        float graY = fabs(motion.gravity.y);
+//
+//        if (absX > absY)
+//        {
+//            CGFloat newAngle =  weakSelf.currentMotionX - angleX;
+//
+//            if (newAngle != 0)
+//            {
+//                NSLog(@"绕x轴 absX：%f,absY：%f,currentMotionX：%f,angleX：%f,newAngle：%f",absX,absY, weakSelf.currentMotionX,angleX,newAngle);
+//                weakSelf.scnView.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(weakSelf.scnView.scene.rootNode.childNodes.firstObject.transform,motion.rotationRate.x, 1, 0, 0);
+//            }
+//        }
+//        else
+//        {
+//            CGFloat newAngle = weakSelf.currentMotionY - angleY;
+//
+//            if (newAngle != 0)
+//            {
+//                NSLog(@"绕y轴 absX：%f,absY：%f, currentMotionY：%f,angleY：%f,newAngle：%f",absX,absY,weakSelf.currentMotionY,angleY,newAngle);
+//                weakSelf.scnView.scene.rootNode.childNodes.firstObject.pivot = SCNMatrix4Rotate(weakSelf.scnView.scene.rootNode.childNodes.firstObject.pivot,newAngle, 0, 1, 0);
+//            }
+//        }
+//
+//        weakSelf.currentMotionX = angleX;
+//        weakSelf.currentMotionY = angleY;
+//    }];
 }
 
 - (void) handleTap:(UIGestureRecognizer*)gestureRecognize
@@ -198,8 +230,8 @@
     
     if (absX > absY)
     {
-        CGFloat newAngle = (CGFloat)translation.x * (CGFloat)M_PI / 180.0 /KRotateFactor;
-        _scnView.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(_scnView.scene.rootNode.childNodes.firstObject.transform,newAngle, 0, 1, 0);
+        CGFloat newAngle = (CGFloat)translation.x * (CGFloat)M_PI / 180.0 /80;
+        _scnView.scene.rootNode.childNodes.firstObject.pivot = SCNMatrix4Rotate(_scnView.scene.rootNode.childNodes.firstObject.pivot,newAngle, 0, 1, 0);
 
 
         if (gesture.state == UIGestureRecognizerStateEnded)
@@ -209,7 +241,7 @@
     }
     else
     {
-        CGFloat newAngle = (CGFloat)translation.y * (CGFloat)M_PI / 180.0 /KRotateFactor;
+        CGFloat newAngle = (CGFloat)translation.y * (CGFloat)M_PI / 180.0 /80;
         _scnView.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(_scnView.scene.rootNode.childNodes.firstObject.transform,newAngle, 1, 0, 0);
 
         if (gesture.state == UIGestureRecognizerStateEnded)
