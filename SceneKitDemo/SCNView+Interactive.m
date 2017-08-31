@@ -64,7 +64,7 @@ static NSString * const interactive_motionManager_key = @"interactive_motionMana
     [[self motionManager] startGyroUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMGyroData * _Nullable gyroData, NSError * _Nullable error)
     {
         float rotX = gyroData.rotationRate.x * weakSelf.motionRotateFactor.floatValue;
-        float rotY = gyroData.rotationRate.y/weakSelf.motionRotateFactor.floatValue;
+        float rotY = gyroData.rotationRate.y * weakSelf.motionRotateFactor.floatValue;
         
         if (fabs(rotX) > fabs(rotY))
         {
@@ -89,7 +89,7 @@ static NSString * const interactive_motionManager_key = @"interactive_motionMana
     
     if (absX > absY)
     {
-        CGFloat newAngle = (CGFloat)translation.x * (CGFloat)M_PI / 180.0 * self.gestureRotateFactor.floatValue;
+        CGFloat newAngle = -(CGFloat)translation.x * (CGFloat)M_PI / 180.0 * self.gestureRotateFactor.floatValue;
         self.scene.rootNode.childNodes.firstObject.pivot = SCNMatrix4Rotate(self.scene.rootNode.childNodes.firstObject.pivot,newAngle, 0, 1, 0);
         
         

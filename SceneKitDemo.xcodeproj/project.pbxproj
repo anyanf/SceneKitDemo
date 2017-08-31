@@ -27,6 +27,7 @@
 		FD6D72971F457B3F002CED1B /* house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD6D72961F457B3F002CED1B /* house.jpg */; };
 		FDAB55321F57E3AF00AB185B /* PanoramaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAB55311F57E3AF00AB185B /* PanoramaViewController.m */; };
 		FDB443B91F57EE1000111D1B /* RootNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB443B81F57EE1000111D1B /* RootNavController.m */; };
+		FDB443BC1F58197200111D1B /* SCNView+Interactive.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB443BB1F58197200111D1B /* SCNView+Interactive.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,8 @@
 		FDAB55311F57E3AF00AB185B /* PanoramaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PanoramaViewController.m; sourceTree = "<group>"; };
 		FDB443B71F57EE1000111D1B /* RootNavController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootNavController.h; sourceTree = "<group>"; };
 		FDB443B81F57EE1000111D1B /* RootNavController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootNavController.m; sourceTree = "<group>"; };
+		FDB443BA1F58197100111D1B /* SCNView+Interactive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCNView+Interactive.h"; sourceTree = "<group>"; };
+		FDB443BB1F58197200111D1B /* SCNView+Interactive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCNView+Interactive.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 				FD151FB01F41BA880077A3A2 /* Show3DViewController.m */,
 				FD217B611F5511C90052F6DF /* ARViewController.h */,
 				FD217B621F5511C90052F6DF /* ARViewController.m */,
+				FDB443BA1F58197100111D1B /* SCNView+Interactive.h */,
+				FDB443BB1F58197200111D1B /* SCNView+Interactive.m */,
 				FD151FB51F41BA880077A3A2 /* Assets.xcassets */,
 				FD151FB71F41BA880077A3A2 /* LaunchScreen.storyboard */,
 				FD151FBA1F41BA880077A3A2 /* Info.plist */,
@@ -219,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDB443BC1F58197200111D1B /* SCNView+Interactive.m in Sources */,
 				FDB443B91F57EE1000111D1B /* RootNavController.m in Sources */,
 				FD151FB11F41BA880077A3A2 /* Show3DViewController.m in Sources */,
 				FD151FAE1F41BA880077A3A2 /* AppDelegate.m in Sources */,

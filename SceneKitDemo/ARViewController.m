@@ -9,6 +9,7 @@
 #import "ARViewController.h"
 #import <ARKit/ARKit.h>
 #import <SceneKit/SceneKit.h>
+#import "SCNView+Interactive.h"
 
 @interface ARViewController ()
  <ARSCNViewDelegate>
@@ -35,6 +36,7 @@
     SCNScene *scene = [SCNScene sceneNamed:@"ship.scn"];
     self.sceneView.scene = scene;
     [self.view addSubview:self.sceneView];
+    [self.sceneView startCustomInterActive];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -42,10 +44,16 @@
     [super viewWillAppear:animated];
 
     // Create a session configuration
-    ARWorldTrackingConfiguration *configuration = [ARWorldTrackingConfiguration new];
-    
-    // Run the view's session
-    [self.sceneView.session runWithConfiguration:configuration];
+    if (@available(iOS 11.0, *)) {
+        ARWorldTrackingSessionConfiguration *configuration = [ARWorldTrackingSessionConfiguration new];
+        // 设置追踪方向（追踪平面）
+        configuration.planeDetection = ARPlaneDetectionHorizontal;
+        configuration.lightEstimationEnabled = YES;
+        // Run the view's session
+        [self.sceneView.session runWithConfiguration:configuration];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -9,7 +9,7 @@
 #import "Show3DViewController.h"
 #import <SceneKit/SceneKit.h>
 #import <CoreMotion/CoreMotion.h>
-
+#import "SCNView+Interactive.h"
 
 #define KRotateFactor  (100)
 
@@ -77,7 +77,7 @@
         _cameraNode.position = SCNVector3Make(0, 0, 20);
         [_scnView.scene.rootNode addChildNode:_cameraNode];
     
-    /// 添加点击手势
+   /* /// 添加点击手势
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     NSMutableArray *gestureRecognizers = [NSMutableArray array];
     [gestureRecognizers addObject:tapGesture];
@@ -98,7 +98,8 @@
         _motionManager.deviceMotionUpdateInterval = 1.0/10;
         _motionManager.gyroUpdateInterval = 1.0/60;
         [self startDeviceMotionUpdates];
-    }
+    }*/
+    [self.scnView startCustomInterActive];
 }
 
 - (void)startDeviceMotionUpdates
