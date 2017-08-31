@@ -7,7 +7,7 @@
 //
 
 #import "RootViewController.h"
-#import "SceneViewController.h"
+#import "Show3DViewController.h"
 #import "ARViewController.h"
 
 @interface RootViewController ()
@@ -20,6 +20,7 @@ UITableViewDataSource
 
 @property (nonatomic, strong) NSArray *aryData;
 
+@property (nonatomic, strong) NSArray *aryVCClasses;
 
 
 @end
@@ -32,7 +33,9 @@ UITableViewDataSource
     
     self.title = @"ScenceKit";
     
-    _aryData = @[@"全景图片展示",@"3D模型展示",@"ARKit"];
+    _aryData = @[@"全景图片展示",@"3D模型展示",@"AR"];
+    _aryVCClasses = @[@"PanoramaViewController",@"Show3DViewController",@"ARViewController"];
+    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -70,17 +73,22 @@ UITableViewDataSource
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 2)
-    {
-        ARViewController *arVC = [[ARViewController alloc] init];
-        [self.navigationController pushViewController:arVC animated:YES];
-    }
-    else
-    {
-        SceneViewController *sceneVC = [[SceneViewController alloc] init];
-        sceneVC.pageType = indexPath.row;
-        [self.navigationController pushViewController:sceneVC animated:YES];
-    }
+    NSString *str = [_aryVCClasses objectAtIndex:indexPath.row];
+    Class classVC = NSClassFromString(str);
+    UIViewController *vc = [[classVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+//支持旋转
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+//支持的方向 只需要支持竖屏
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

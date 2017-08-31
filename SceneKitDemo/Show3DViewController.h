@@ -1,5 +1,5 @@
 //
-//  SceneViewController.h
+//  Show3DViewController.h
 //  SceneKitDemo
 //
 //  Created by 张贝贝 on 2017/8/14.
@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger,GME_PageType)
     GME_PageType_3D = 1
 };
 
-@interface SceneViewController : UIViewController
+@interface Show3DViewController : UIViewController
 
 /// 是否展示3D模型
 @property (nonatomic, assign) GME_PageType pageType;
