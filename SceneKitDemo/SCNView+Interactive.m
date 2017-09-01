@@ -15,7 +15,7 @@
 static NSString * const interactive_gestureRotateFactor_key = @"interactive_gestureRotateFactor_key";
 static NSString * const interactive_motionRotateFactor_key = @"interactive_motionRotateFactor_key";
 static NSString * const interactive_motionManager_key = @"interactive_motionManager_key";
-
+static NSString * const interactive_aryNodes_key = @"interactive_aryNodes_key";
 
 
 @implementation SCNView (Interactive)
@@ -68,12 +68,11 @@ static NSString * const interactive_motionManager_key = @"interactive_motionMana
         
         if (fabs(rotX) > fabs(rotY))
         {
-            weakSelf.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(weakSelf.scene.rootNode.childNodes.firstObject.transform,rotX, 1, 0, 0);
-            
+            [self modifyingNodeTransform:rotX rotateX:1 rotateY:0 rotateZ:0];
         }
         else
         {
-            weakSelf.scene.rootNode.childNodes.firstObject.pivot = SCNMatrix4Rotate(weakSelf.scene.rootNode.childNodes.firstObject.pivot,rotY, 0, 1, 0);
+            [self modifyingNodeTransform:rotY rotateX:0 rotateY:1 rotateZ:0];
         }
     }];
 }
@@ -90,8 +89,8 @@ static NSString * const interactive_motionManager_key = @"interactive_motionMana
     if (absX > absY)
     {
         CGFloat newAngle = -(CGFloat)translation.x * (CGFloat)M_PI / 180.0 * self.gestureRotateFactor.floatValue;
-        self.scene.rootNode.childNodes.firstObject.pivot = SCNMatrix4Rotate(self.scene.rootNode.childNodes.firstObject.pivot,newAngle, 0, 1, 0);
-        
+
+        [self modifyingNodePivot:newAngle rotateX:0 rotateY:1 rotateZ:0];
         
         if (gesture.state == UIGestureRecognizerStateEnded)
         {
@@ -101,7 +100,8 @@ static NSString * const interactive_motionManager_key = @"interactive_motionMana
     else
     {
         CGFloat newAngle = (CGFloat)translation.y * (CGFloat)M_PI / 180.0 * self.gestureRotateFactor.floatValue;
-        self.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(self.scene.rootNode.childNodes.firstObject.transform,newAngle, 1, 0, 0);
+
+        [self modifyingNodeTransform:newAngle rotateX:1 rotateY:0 rotateZ:0];
         
         if (gesture.state == UIGestureRecognizerStateEnded)
         {
@@ -111,8 +111,53 @@ static NSString * const interactive_motionManager_key = @"interactive_motionMana
     
 }
 
+- (void)modifyingNodeTransform:(CGFloat)newAngle rotateX:(float)rotateX rotateY:(float)rotateY rotateZ:(float)rotateZ
+{
+    
+    if (self.aryNodes)
+    {
+        for (SCNNode *node in self.aryNodes)
+        {
+            node.transform = SCNMatrix4Rotate(node.transform,
+                                              newAngle,
+                                              rotateX,
+                                              rotateY,
+                                              rotateZ);
+        }
+    }
+    else
+    {
+        self.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(self.scene.rootNode.childNodes.firstObject.transform,
+                                                                                newAngle,
+                                                                                rotateX,
+                                                                                rotateY,
+                                                                                rotateZ);
+    }
+    
+}
 
-
+- (void)modifyingNodePivot:(CGFloat)newAngle rotateX:(float)rotateX rotateY:(float)rotateY rotateZ:(float)rotateZ
+{
+    if (self.aryNodes)
+    {
+        for (SCNNode *node in self.aryNodes)
+        {
+            node.pivot = SCNMatrix4Rotate(node.pivot,
+                                          newAngle,
+                                          rotateX,
+                                          rotateY,
+                                          rotateZ);
+        }
+    }
+    else
+    {
+        self.scene.rootNode.childNodes.firstObject.pivot = SCNMatrix4Rotate(self.scene.rootNode.childNodes.firstObject.pivot,
+                                                                            newAngle,
+                                                                            rotateX,
+                                                                            rotateY,
+                                                                            rotateZ);
+    }
+}
 
 
 #pragma mark - 各种属性的 set & get
@@ -145,6 +190,16 @@ static NSString * const interactive_motionManager_key = @"interactive_motionMana
 {
     objc_setAssociatedObject(self, &interactive_motionManager_key, motionManager, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+
+- (NSArray *)aryNodes
+{
+    return objc_getAssociatedObject(self, &interactive_aryNodes_key);
+}
+- (void)setAryNodes:(NSArray *)aryNodes
+{
+    objc_setAssociatedObject(self, &interactive_aryNodes_key, aryNodes, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 
 
 @end

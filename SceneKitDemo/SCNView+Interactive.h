@@ -17,8 +17,8 @@
 /// 陀螺仪旋转系数 默认 0.0125
 @property (nonatomic, strong) NSNumber *motionRotateFactor;
 
-
-
+/// 响应手势的 node 数组，默认是rootNode.childNodes.firstObject
+@property (nonatomic, strong) NSArray *aryNodes;
 
 
 /// 开启自定义交互,一旦开启不可逆
