@@ -14,17 +14,15 @@
 		FD151FB61F41BA880077A3A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD151FB51F41BA880077A3A2 /* Assets.xcassets */; };
 		FD151FB91F41BA880077A3A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD151FB71F41BA880077A3A2 /* LaunchScreen.storyboard */; };
 		FD151FC21F41BBA80077A3A2 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD151FC11F41BBA80077A3A2 /* SceneKit.framework */; };
-		FD151FC41F41BC2A0077A3A2 /* ship.scn in Resources */ = {isa = PBXBuildFile; fileRef = FD151FC31F41BC2A0077A3A2 /* ship.scn */; };
-		FD151FCA1F41BE520077A3A2 /* monkey.dae in Resources */ = {isa = PBXBuildFile; fileRef = FD151FC91F41BE520077A3A2 /* monkey.dae */; };
-		FD151FCC1F41BF330077A3A2 /* man.dae in Resources */ = {isa = PBXBuildFile; fileRef = FD151FCB1F41BF330077A3A2 /* man.dae */; };
 		FD217B631F5511C90052F6DF /* ARViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD217B621F5511C90052F6DF /* ARViewController.m */; };
-		FD6AED521F55675B008B6608 /* BeiJing_xiao.obj in Resources */ = {isa = PBXBuildFile; fileRef = FD6AED511F55643E008B6608 /* BeiJing_xiao.obj */; };
-		FD6AED531F556764008B6608 /* BeiJingxiao.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD6AED501F55643E008B6608 /* BeiJingxiao.jpg */; };
-		FD6AED551F55698A008B6608 /* Beijingxiao.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FD6AED541F55698A008B6608 /* Beijingxiao.scnassets */; };
-		FD6D72901F443527002CED1B /* man11.obj in Resources */ = {isa = PBXBuildFile; fileRef = FD6D728F1F443527002CED1B /* man11.obj */; };
-		FD6D72921F4436F8002CED1B /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = FD6D72911F4436F8002CED1B /* texture.png */; };
+		FD2936EB1F6B80210046DF59 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FD2936EA1F6B80210046DF59 /* Models.scnassets */; };
 		FD6D72951F45634D002CED1B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D72941F45634D002CED1B /* RootViewController.m */; };
 		FD6D72971F457B3F002CED1B /* house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD6D72961F457B3F002CED1B /* house.jpg */; };
+		FD91D9FA207C97E100AE0B94 /* DELL_bijiben_4669885.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FD91D9F9207C97E000AE0B94 /* DELL_bijiben_4669885.scnassets */; };
+		FD91DA04207DFB1F00AE0B94 /* MeiLing_bingxiang_4360469.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FD91DA03207DFB1F00AE0B94 /* MeiLing_bingxiang_4360469.scnassets */; };
+		FD91DA06207EF95500AE0B94 /* Jixieshi_bijiben_11159963509_V1_dae.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FD91DA05207EF95500AE0B94 /* Jixieshi_bijiben_11159963509_V1_dae.scnassets */; };
+		FD97D3AA1F6A50B400806A23 /* ARSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD97D3A91F6A50B400806A23 /* ARSceneViewController.m */; };
+		FD9AE352208ECEBF001799DF /* ARSCNTools.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AE351208ECEBF001799DF /* ARSCNTools.m */; };
 		FDAB55321F57E3AF00AB185B /* PanoramaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAB55311F57E3AF00AB185B /* PanoramaViewController.m */; };
 		FDB443B91F57EE1000111D1B /* RootNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB443B81F57EE1000111D1B /* RootNavController.m */; };
 		FDB443BC1F58197200111D1B /* SCNView+Interactive.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB443BB1F58197200111D1B /* SCNView+Interactive.m */; };
@@ -42,19 +40,19 @@
 		FD151FB81F41BA880077A3A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD151FBA1F41BA880077A3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD151FC11F41BBA80077A3A2 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
-		FD151FC31F41BC2A0077A3A2 /* ship.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ship.scn; sourceTree = "<group>"; };
-		FD151FC91F41BE520077A3A2 /* monkey.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = monkey.dae; sourceTree = "<group>"; };
-		FD151FCB1F41BF330077A3A2 /* man.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = man.dae; sourceTree = "<group>"; };
 		FD217B611F5511C90052F6DF /* ARViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARViewController.h; sourceTree = "<group>"; };
 		FD217B621F5511C90052F6DF /* ARViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARViewController.m; sourceTree = "<group>"; };
-		FD6AED501F55643E008B6608 /* BeiJingxiao.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BeiJingxiao.jpg; sourceTree = "<group>"; };
-		FD6AED511F55643E008B6608 /* BeiJing_xiao.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = BeiJing_xiao.obj; sourceTree = "<group>"; };
-		FD6AED541F55698A008B6608 /* Beijingxiao.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Beijingxiao.scnassets; sourceTree = "<group>"; };
-		FD6D728F1F443527002CED1B /* man11.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = man11.obj; sourceTree = "<group>"; };
-		FD6D72911F4436F8002CED1B /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
+		FD2936EA1F6B80210046DF59 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		FD6D72931F45634D002CED1B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		FD6D72941F45634D002CED1B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		FD6D72961F457B3F002CED1B /* house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = house.jpg; sourceTree = "<group>"; };
+		FD91D9F9207C97E000AE0B94 /* DELL_bijiben_4669885.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = DELL_bijiben_4669885.scnassets; sourceTree = "<group>"; };
+		FD91DA03207DFB1F00AE0B94 /* MeiLing_bingxiang_4360469.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = MeiLing_bingxiang_4360469.scnassets; sourceTree = "<group>"; };
+		FD91DA05207EF95500AE0B94 /* Jixieshi_bijiben_11159963509_V1_dae.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Jixieshi_bijiben_11159963509_V1_dae.scnassets; sourceTree = "<group>"; };
+		FD97D3A81F6A50B400806A23 /* ARSceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARSceneViewController.h; sourceTree = "<group>"; };
+		FD97D3A91F6A50B400806A23 /* ARSceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARSceneViewController.m; sourceTree = "<group>"; };
+		FD9AE350208ECEBF001799DF /* ARSCNTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARSCNTools.h; sourceTree = "<group>"; };
+		FD9AE351208ECEBF001799DF /* ARSCNTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARSCNTools.m; sourceTree = "<group>"; };
 		FDAB55301F57E3AF00AB185B /* PanoramaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PanoramaViewController.h; sourceTree = "<group>"; };
 		FDAB55311F57E3AF00AB185B /* PanoramaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PanoramaViewController.m; sourceTree = "<group>"; };
 		FDB443B71F57EE1000111D1B /* RootNavController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootNavController.h; sourceTree = "<group>"; };
@@ -96,14 +94,10 @@
 		FD151FA81F41BA880077A3A2 /* SceneKitDemo */ = {
 			isa = PBXGroup;
 			children = (
-				FD6AED541F55698A008B6608 /* Beijingxiao.scnassets */,
-				FD151FC31F41BC2A0077A3A2 /* ship.scn */,
-				FD6D72911F4436F8002CED1B /* texture.png */,
-				FD151FC91F41BE520077A3A2 /* monkey.dae */,
-				FD151FCB1F41BF330077A3A2 /* man.dae */,
-				FD6D728F1F443527002CED1B /* man11.obj */,
-				FD6AED511F55643E008B6608 /* BeiJing_xiao.obj */,
-				FD6AED501F55643E008B6608 /* BeiJingxiao.jpg */,
+				FD91DA05207EF95500AE0B94 /* Jixieshi_bijiben_11159963509_V1_dae.scnassets */,
+				FD91DA03207DFB1F00AE0B94 /* MeiLing_bingxiang_4360469.scnassets */,
+				FD91D9F9207C97E000AE0B94 /* DELL_bijiben_4669885.scnassets */,
+				FD2936EA1F6B80210046DF59 /* Models.scnassets */,
 				FD6D72961F457B3F002CED1B /* house.jpg */,
 				FD151FAC1F41BA880077A3A2 /* AppDelegate.h */,
 				FD151FAD1F41BA880077A3A2 /* AppDelegate.m */,
@@ -117,8 +111,12 @@
 				FD151FB01F41BA880077A3A2 /* Show3DViewController.m */,
 				FD217B611F5511C90052F6DF /* ARViewController.h */,
 				FD217B621F5511C90052F6DF /* ARViewController.m */,
+				FD97D3A81F6A50B400806A23 /* ARSceneViewController.h */,
+				FD97D3A91F6A50B400806A23 /* ARSceneViewController.m */,
 				FDB443BA1F58197100111D1B /* SCNView+Interactive.h */,
 				FDB443BB1F58197200111D1B /* SCNView+Interactive.m */,
+				FD9AE350208ECEBF001799DF /* ARSCNTools.h */,
+				FD9AE351208ECEBF001799DF /* ARSCNTools.m */,
 				FD151FB51F41BA880077A3A2 /* Assets.xcassets */,
 				FD151FB71F41BA880077A3A2 /* LaunchScreen.storyboard */,
 				FD151FBA1F41BA880077A3A2 /* Info.plist */,
@@ -203,17 +201,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD6AED531F556764008B6608 /* BeiJingxiao.jpg in Resources */,
-				FD6AED521F55675B008B6608 /* BeiJing_xiao.obj in Resources */,
-				FD6D72901F443527002CED1B /* man11.obj in Resources */,
-				FD6D72921F4436F8002CED1B /* texture.png in Resources */,
+				FD91DA06207EF95500AE0B94 /* Jixieshi_bijiben_11159963509_V1_dae.scnassets in Resources */,
+				FD91DA04207DFB1F00AE0B94 /* MeiLing_bingxiang_4360469.scnassets in Resources */,
+				FD91D9FA207C97E100AE0B94 /* DELL_bijiben_4669885.scnassets in Resources */,
 				FD151FB91F41BA880077A3A2 /* LaunchScreen.storyboard in Resources */,
 				FD6D72971F457B3F002CED1B /* house.jpg in Resources */,
-				FD6AED551F55698A008B6608 /* Beijingxiao.scnassets in Resources */,
 				FD151FB61F41BA880077A3A2 /* Assets.xcassets in Resources */,
-				FD151FCC1F41BF330077A3A2 /* man.dae in Resources */,
-				FD151FCA1F41BE520077A3A2 /* monkey.dae in Resources */,
-				FD151FC41F41BC2A0077A3A2 /* ship.scn in Resources */,
+				FD2936EB1F6B80210046DF59 /* Models.scnassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,7 +221,9 @@
 				FDB443BC1F58197200111D1B /* SCNView+Interactive.m in Sources */,
 				FDB443B91F57EE1000111D1B /* RootNavController.m in Sources */,
 				FD151FB11F41BA880077A3A2 /* Show3DViewController.m in Sources */,
+				FD97D3AA1F6A50B400806A23 /* ARSceneViewController.m in Sources */,
 				FD151FAE1F41BA880077A3A2 /* AppDelegate.m in Sources */,
+				FD9AE352208ECEBF001799DF /* ARSCNTools.m in Sources */,
 				FD6D72951F45634D002CED1B /* RootViewController.m in Sources */,
 				FDAB55321F57E3AF00AB185B /* PanoramaViewController.m in Sources */,
 				FD151FAB1F41BA880077A3A2 /* main.m in Sources */,
