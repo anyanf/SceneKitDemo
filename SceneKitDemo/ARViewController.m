@@ -7,75 +7,72 @@
 //
 
 #import "ARViewController.h"
-#import <ARKit/ARKit.h>
-#import <SceneKit/SceneKit.h>
-#import "SCNView+Interactive.h"
+#import "ARSceneViewController.h"
 
 @interface ARViewController ()
- <ARSCNViewDelegate>
+<
+UITableViewDelegate,
+UITableViewDataSource
+>
 
-@property (nonatomic, strong) ARSCNView *sceneView;
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) NSArray *aryData;
 
 @end
 
 @implementation ARViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.sceneView = [[ARSCNView alloc] initWithFrame:self.view.bounds];
-    // Set the view's delegate
-    self.sceneView.delegate = self;
-    self.sceneView.allowsCameraControl = YES;
+    _aryData = @[@"点击添加一个虚拟物体",@"捕捉平地添加虚拟物体",@"虚拟物体跟随相机移动",@"虚拟物体围绕相机旋转"];
     
-    // Show statistics such as fps and timing information
-    self.sceneView.showsStatistics = YES;
-    
-    // Create a new scene
-    SCNScene *scene = [SCNScene sceneNamed:@"ship.scn"];
-    self.sceneView.scene = scene;
-    [self.view addSubview:self.sceneView];
-    [self.sceneView startCustomInterActive];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [super viewWillAppear:animated];
+    return _aryData.count;
+}
 
-    // Create a session configuration
-    if (@available(iOS 11.0, *)) {
-        ARWorldTrackingSessionConfiguration *configuration = [ARWorldTrackingSessionConfiguration new];
-        // 设置追踪方向（追踪平面）
-        configuration.planeDetection = ARPlaneDetectionHorizontal;
-        configuration.lightEstimationEnabled = YES;
-        // Run the view's session
-        [self.sceneView.session runWithConfiguration:configuration];
-    } else {
-        // Fallback on earlier versions
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *strId = @"cellID";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:strId];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:strId];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+    cell.textLabel.text = _aryData[indexPath.row];
     
-    // Pause the view's session
-    [self.sceneView.session pause];
+    return cell;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    ARSceneViewController *vc = [[ARSceneViewController alloc] init];
+    vc.arType = indexPath.row + 1;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

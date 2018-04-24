@@ -10,6 +10,7 @@
 #import <SceneKit/SceneKit.h>
 #import <CoreMotion/CoreMotion.h>
 #import "SCNView+Interactive.h"
+#import "ARSCNTools.h"
 
 #define KRotateFactor  (100)
 
@@ -35,91 +36,50 @@
     _scnView.autoenablesDefaultLighting = YES;
     [self.view addSubview:_scnView];
     
-    
     /// 加载资源，如果是scn格式的，需要有对应的png图片
-//        _scnView.scene = [SCNScene sceneNamed:@"Beijingxiao.scnassets/BeiJing_xiao.obj"];
-//        SCNGeometry *geometry = [SCNGeometry geometry];
-//        geometry.firstMaterial.diffuse.contents = [UIImage imageNamed:@"BeiJingxiao.jpg"];
-//        _scnView.scene.rootNode.geometry = geometry;
-        _scnView.scene = [SCNScene scene];
-        
-        SCNBox *box = [SCNBox boxWithWidth:10 height:10 length:10 chamferRadius:1];
-        SCNMaterial *redMaterial = [SCNMaterial new];
-        redMaterial.diffuse.contents = [UIColor redColor];
+    _scnView.scene = [SCNScene sceneNamed:@"MeiLing_bingxiang_4360469.scnassets/MeiLing_bingxiang_4360469.DAE"];
 
-        SCNMaterial *blueMaterial = [SCNMaterial new];
-        blueMaterial.diffuse.contents = [UIColor blueColor];
-
-        SCNMaterial *greenMaterial = [SCNMaterial new];
-        greenMaterial.diffuse.contents = [UIColor greenColor];
-
-        box.materials = @[redMaterial,blueMaterial,redMaterial,blueMaterial,greenMaterial,greenMaterial];
-
-        [_scnView.scene.rootNode addChildNode:[SCNNode nodeWithGeometry:box]];
+    // 外围光
+    SCNNode *ambientLightNode = [SCNNode node];
+    ambientLightNode.light = [SCNLight light];
+    ambientLightNode.light.type = SCNLightTypeAmbient;
+    ambientLightNode.light.color = [UIColor colorWithWhite:0.75 alpha:1.0];
+    [_scnView.scene.rootNode addChildNode:ambientLightNode];
     
-        // 光
-        SCNNode *lightNode = [SCNNode node];
-        lightNode.light = [SCNLight light];
-        lightNode.light.type = SCNLightTypeAmbient;
-        lightNode.light.color = [UIColor colorWithWhite:0.4 alpha:1.0];
-        [_scnView.scene.rootNode addChildNode:lightNode];
-
-        // 外围光
-        SCNNode *ambientLightNode = [SCNNode node];
-        ambientLightNode.light = [SCNLight light];
-        ambientLightNode.light.type = SCNLightTypeOmni;
-        ambientLightNode.light.color = [UIColor colorWithWhite:0.75 alpha:1.0];
-        [_scnView.scene.rootNode addChildNode:ambientLightNode];
-
-        // 添加一个观察视角
-        _cameraNode = [SCNNode node];
-        _cameraNode.camera = [SCNCamera camera];
-        _cameraNode.position = SCNVector3Make(0, 0, 20);
-        [_scnView.scene.rootNode addChildNode:_cameraNode];
+    // 添加一个观察视角
+    _cameraNode = [SCNNode node];
+    _cameraNode.camera = [SCNCamera camera];
+    _cameraNode.position = SCNVector3Make(0, 0, 20);
+    [_scnView.scene.rootNode addChildNode:_cameraNode];
     
-   /* /// 添加点击手势
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    NSMutableArray *gestureRecognizers = [NSMutableArray array];
-    [gestureRecognizers addObject:tapGesture];
-    [gestureRecognizers addObjectsFromArray:_scnView.gestureRecognizers];
-    _scnView.gestureRecognizers = gestureRecognizers;
+    SCNNode *node = [_scnView.scene.rootNode.childNodes objectAtIndex:0];
     
-    for (UIGestureRecognizer *gesture in _scnView.gestureRecognizers)
-    {
-        if ([gesture isKindOfClass:[UIPanGestureRecognizer class]])
-        {
-            [gesture removeTarget:nil action:nil];
-            [gesture addTarget:self action:@selector(handlePan:)];
-        }
-    }
-
-    _motionManager = [[CMMotionManager alloc]init];
-    if (_motionManager.deviceMotionAvailable) {
-        _motionManager.deviceMotionUpdateInterval = 1.0/10;
-        _motionManager.gyroUpdateInterval = 1.0/60;
-        [self startDeviceMotionUpdates];
-    }*/
+    SCNGeometry *geometry = node.geometry;
+    /// 为材质贴图
+    [ARSCNTools addMaterialsForNode:node sourcePath:@"MeiLing_bingxiang_4360469.scnassets/config.json"];
+    
     [self.scnView startCustomInterActive];
 }
+
 
 - (void)startDeviceMotionUpdates
 {
     __weak typeof(self) weakSelf = self;
-
+    
     [_motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMGyroData * _Nullable gyroData, NSError * _Nullable error) {
         float rotX = gyroData.rotationRate.x/KRotateFactor;
         float rotY = gyroData.rotationRate.y/KRotateFactor;
-    
+        
         if (fabs(rotX) > fabs(rotY))
         {
-           weakSelf.scnView.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(weakSelf.scnView.scene.rootNode.childNodes.firstObject.transform,rotX, 1, 0, 0);
-
+            weakSelf.scnView.scene.rootNode.childNodes.firstObject.transform = SCNMatrix4Rotate(weakSelf.scnView.scene.rootNode.childNodes.firstObject.transform,rotX, 1, 0, 0);
+            
         }
         else
         {
             weakSelf.scnView.scene.rootNode.childNodes.firstObject.pivot = SCNMatrix4Rotate(weakSelf.scnView.scene.rootNode.childNodes.firstObject.pivot,rotY, 0, 1, 0);
         }
-            }];
+    }];
 }
 
 - (void)handleTap:(UIGestureRecognizer*)gestureRecognize
