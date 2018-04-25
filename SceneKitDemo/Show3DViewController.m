@@ -37,7 +37,7 @@
     [self.view addSubview:_scnView];
     
     /// 加载资源，如果是scn格式的，需要有对应的png图片
-    _scnView.scene = [SCNScene sceneNamed:@"MeiLing_bingxiang_4360469.scnassets/MeiLing_bingxiang_4360469.DAE"];
+    _scnView.scene = [SCNScene sceneNamed:@"DELL_bijiben_4669885.scnassets/DELL_bijiben_4669885.obj"];
 
     // 外围光
     SCNNode *ambientLightNode = [SCNNode node];
@@ -54,11 +54,13 @@
     
     SCNNode *node = [_scnView.scene.rootNode.childNodes objectAtIndex:0];
     
-    SCNGeometry *geometry = node.geometry;
     /// 为材质贴图
     [ARSCNTools addMaterialsForNode:node sourcePath:@"MeiLing_bingxiang_4360469.scnassets/config.json"];
     
     [self.scnView startCustomInterActive];
+    
+    self.scnView.scene.rootNode.position = SCNVector3Make(0, 0, 0);
+    
 }
 
 
