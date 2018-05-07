@@ -54,6 +54,7 @@ ARSessionDelegate
     // Create a session configuration
     if (@available(iOS 11.0, *)) {
         [self.view addSubview:self.arSceneView];
+        [self.arSceneView startCustomInterActive];
         
         // Run the view's session
         [self.arSceneView.session runWithConfiguration:self.arSessionConfiguration];
@@ -71,6 +72,8 @@ ARSessionDelegate
     
     // Pause the view's session
     [self.arSceneView.session pause];
+    self.arSceneView.delegate = nil;
+    self.arSession.delegate = nil;
 }
 
 - (void)addBtnPhoto
@@ -111,66 +114,69 @@ ARSessionDelegate
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    if (self.arType == ARTypePlane || self.planeNode)
-    {
-        return;
-    }
+    [self addSceneNodeToNode:self.planeNode postion:SCNVector3Make(self.planeAnchor.center.x, 0, self.planeAnchor.center.z)];
+    self.navigationItem.title = @"";
     
-    UITouch *touch = [[touches allObjects] firstObject];
-    CGPoint point = [touch locationInView:self.arSceneView];
-    
-    //1.使用场景加载scn文件（scn格式文件是一个基于3D建模的文件，使用3DMax软件可以创建，这里系统有一个默认的3D飞机）--------在右侧我添加了许多3D模型，只需要替换文件名即可
-    SCNScene *scene = [SCNScene sceneNamed:@"ship.scn"];
-    //2.获取飞机节点（一个场景会有多个节点，此处我们只写，飞机节点则默认是场景子节点的第一个）
-    //所有的场景有且只有一个根节点，其他所有节点都是根节点的子节点
-    SCNNode *shipNode = scene.rootNode.childNodes[0];
-    //飞机比较大，释放缩放一下并且调整位置让其在屏幕中间
-    shipNode.scale = SCNVector3Make(0.5, 0.5, 0.5);
-    shipNode.position = SCNVector3Make(0, 0,-10);
-    ;
-    //一个飞机的3D建模不是一气呵成的，可能会有很多个子节点拼接，所以里面的子节点也要一起改，否则上面的修改会无效
-    for (SCNNode *node in shipNode.childNodes) {
-        node.scale = SCNVector3Make(0.5, 0.5, 0.5);
-        node.position = SCNVector3Make(0,0,-10);
-    }
-    
-    //3.将飞机节点添加到当前屏幕中
-    [self.arSceneView.scene.rootNode addChildNode:shipNode];
-    self.planeNode = shipNode;
-    
-    /// 判断是否是绕相机移动
-    //旋转的话笔者选择的是一个台灯
-    if(self.arType == ARTypeRotation)
-    {
-        //3.绕相机旋转
-        //绕相机旋转的关键点在于：在相机的位置创建一个空节点，然后将台灯添加到这个空节点，最后让这个空节点自身旋转，就可以实现台灯围绕相机旋转
-        //1.为什么要在相机的位置创建一个空节点呢？因为你不可能让相机也旋转
-        //2.为什么不直接让台灯旋转呢？ 这样的话只能实现台灯的自转，而不能实现公转
-        SCNNode *node1 = [[SCNNode alloc] init];
-        
-        //空节点位置与相机节点位置一致
-        node1.position = self.arSceneView.scene.rootNode.position;
-        
-        //将空节点添加到相机的根节点
-        [self.arSceneView.scene.rootNode addChildNode:node1];
-        
-        // !!!将台灯节点作为空节点的子节点，如果不这样，那么你将看到的是台灯自己在转，而不是围着你转
-        [node1 addChildNode:self.planeNode];
-        
-        //旋转核心动画
-        CABasicAnimation *moonRotationAnimation = [CABasicAnimation animationWithKeyPath:@"rotation"];
-        
-        //旋转周期
-        moonRotationAnimation.duration = 30;
-        
-        //围绕Y轴旋转360度
-        moonRotationAnimation.toValue = [NSValue valueWithSCNVector4:SCNVector4Make(0, 1, 0, M_PI * 2)];
-        //无限旋转  重复次数为无穷大
-        moonRotationAnimation.repeatCount = FLT_MAX;
-        
-        //开始旋转
-        [node1 addAnimation:moonRotationAnimation forKey:@"moon rotation around earth"];
-    }
+//    if (self.arType == ARTypePlane || self.planeNode)
+//    {
+//        return;
+//    }
+//
+//    UITouch *touch = [[touches allObjects] firstObject];
+//    CGPoint point = [touch locationInView:self.arSceneView];
+//
+//    //1.使用场景加载scn文件（scn格式文件是一个基于3D建模的文件，使用3DMax软件可以创建，这里系统有一个默认的3D飞机）--------在右侧我添加了许多3D模型，只需要替换文件名即可
+//    SCNScene *scene = [SCNScene sceneNamed:@"ship.scn"];
+//    //2.获取飞机节点（一个场景会有多个节点，此处我们只写，飞机节点则默认是场景子节点的第一个）
+//    //所有的场景有且只有一个根节点，其他所有节点都是根节点的子节点
+//    SCNNode *shipNode = scene.rootNode.childNodes[0];
+//    //飞机比较大，释放缩放一下并且调整位置让其在屏幕中间
+//    shipNode.scale = SCNVector3Make(0.5, 0.5, 0.5);
+//    shipNode.position = SCNVector3Make(0, 0,-10);
+//    ;
+//    //一个飞机的3D建模不是一气呵成的，可能会有很多个子节点拼接，所以里面的子节点也要一起改，否则上面的修改会无效
+//    for (SCNNode *node in shipNode.childNodes) {
+//        node.scale = SCNVector3Make(0.5, 0.5, 0.5);
+//        node.position = SCNVector3Make(0,0,-10);
+//    }
+//
+//    //3.将飞机节点添加到当前屏幕中
+//    [self.arSceneView.scene.rootNode addChildNode:shipNode];
+//    self.planeNode = shipNode;
+//
+//    /// 判断是否是绕相机移动
+//    //旋转的话笔者选择的是一个台灯
+//    if(self.arType == ARTypeRotation)
+//    {
+//        //3.绕相机旋转
+//        //绕相机旋转的关键点在于：在相机的位置创建一个空节点，然后将台灯添加到这个空节点，最后让这个空节点自身旋转，就可以实现台灯围绕相机旋转
+//        //1.为什么要在相机的位置创建一个空节点呢？因为你不可能让相机也旋转
+//        //2.为什么不直接让台灯旋转呢？ 这样的话只能实现台灯的自转，而不能实现公转
+//        SCNNode *node1 = [[SCNNode alloc] init];
+//
+//        //空节点位置与相机节点位置一致
+//        node1.position = self.arSceneView.scene.rootNode.position;
+//
+//        //将空节点添加到相机的根节点
+//        [self.arSceneView.scene.rootNode addChildNode:node1];
+//
+//        // !!!将台灯节点作为空节点的子节点，如果不这样，那么你将看到的是台灯自己在转，而不是围着你转
+//        [node1 addChildNode:self.planeNode];
+//
+//        //旋转核心动画
+//        CABasicAnimation *moonRotationAnimation = [CABasicAnimation animationWithKeyPath:@"rotation"];
+//
+//        //旋转周期
+//        moonRotationAnimation.duration = 30;
+//
+//        //围绕Y轴旋转360度
+//        moonRotationAnimation.toValue = [NSValue valueWithSCNVector4:SCNVector4Make(0, 1, 0, M_PI * 2)];
+//        //无限旋转  重复次数为无穷大
+//        moonRotationAnimation.repeatCount = FLT_MAX;
+//
+//        //开始旋转
+//        [node1 addAnimation:moonRotationAnimation forKey:@"moon rotation around earth"];
+//    }
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0
@@ -233,17 +239,15 @@ ARSessionDelegate
     //3.自动刷新灯光（3D游戏用到，此处可忽略）
     _arSceneView.automaticallyUpdatesLighting = YES;
     
-    
-    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [_arSceneView addGestureRecognizer:tapGes];
+    //    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+//    [_arSceneView addGestureRecognizer:tapGes];
     
     return _arSceneView;
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap
 {
-    [self addSceneNodeToNode:self.planeNode postion:SCNVector3Make(self.planeAnchor.center.x, 0, self.planeAnchor.center.z)];
-    self.navigationItem.title = @"";
+
 }
 
 - (void)addSceneNodeToNode:(SCNNode *)node postion:(SCNVector3)postion
@@ -282,9 +286,9 @@ ARSessionDelegate
                 
                 //1.获取捕捉到的平地锚点
                 ARPlaneAnchor *planeAnchor = (ARPlaneAnchor *)anchor;
-                //2.创建一个3D物体模型    （系统捕捉到的平地是一个不规则大小的长方形，这里将其变成一个长方形，并且是否对平地做了一个缩放效果）
+                //2.创建一个3D物体模型    （系统捕捉到的平地是一个不规则大小的长方形，这里将其变成一个长方形，并且对平地做了一个缩放效果）
                 //参数分别是长宽高和圆角
-                SCNBox *plane = [SCNBox boxWithWidth:planeAnchor.center.x * 0.5 height:0 length:planeAnchor.center.z * 0.5 chamferRadius:0];
+                SCNBox *plane = [SCNBox boxWithWidth:planeAnchor.extent.x height:0 length:planeAnchor.extent.z chamferRadius:0];
                 plane.firstMaterial.diffuse.contents = [UIColor colorWithWhite:1.0 alpha:0.5];
                 
                 //4.创建一个基于3D物体模型的节点
