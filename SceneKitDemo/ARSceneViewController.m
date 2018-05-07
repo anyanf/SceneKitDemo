@@ -29,6 +29,9 @@ ARSessionDelegate
 //会话追踪配置：负责追踪相机的运动
 @property(nonatomic,strong)ARWorldTrackingConfiguration *arSessionConfiguration;
 
+
+@property (nonatomic, strong) SCNScene *sceneReal;
+
 #endif
 
 
@@ -114,7 +117,12 @@ ARSessionDelegate
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self addSceneNodeToNode:self.planeNode postion:SCNVector3Make(self.planeAnchor.center.x, 0, self.planeAnchor.center.z)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self addSceneNodeToNode:self.planeNode postion:SCNVector3Make(self.planeAnchor.center.x, 0, self.planeAnchor.center.z)];
+
+    });
+    
     self.navigationItem.title = @"";
     
 //    if (self.arType == ARTypePlane || self.planeNode)
@@ -265,6 +273,8 @@ ARSessionDelegate
     //5.将节点添加到当前屏幕中
     //!!!此处一定要注意：节点是添加到代理捕捉到的节点中，而不是AR试图的根节点。因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
     [node addChildNode:scene.rootNode];
+    
+    self.sceneReal = scene;
 }
 
 #pragma mark -- ARSCNViewDelegate
@@ -374,7 +384,8 @@ ARSessionDelegate
     NSArray<SCNHitTestResult *> * results= [self.arSceneView hitTest:tapPoint options:hitTestOptions];
     for (SCNHitTestResult *res in results)
     {
-        NSLog(@"%@", res);
+        NSLog(@"%f, %f, %f", res.localCoordinates.x, res.localCoordinates.y, res.localCoordinates.z);
+        self.sceneReal.rootNode.position = res.localCoordinates;
     }
     
     
