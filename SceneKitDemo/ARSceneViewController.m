@@ -234,8 +234,8 @@ ARSessionDelegate
     _arSceneView.automaticallyUpdatesLighting = YES;
     
     
-    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [_arSceneView addGestureRecognizer:tapGes];
+//    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+//    [_arSceneView addGestureRecognizer:tapGes];
     
     return _arSceneView;
 }
@@ -292,7 +292,7 @@ ARSessionDelegate
                 //5.设置节点的位置为捕捉到的平地的锚点的中心位置  SceneKit框架中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
                 planeNode.position =SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
                 [node addChildNode:planeNode];
-
+                
                 self.planeNode = node;
                 self.planeAnchor = planeAnchor;
                 //2.当捕捉到平地时 提示点击屏幕可以添加物体
@@ -354,6 +354,23 @@ ARSessionDelegate
 - (void)session:(ARSession *)session didRemoveAnchors:(NSArray<ARAnchor*>*)anchors
 {
     NSLog(@"移除锚点");
+    
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    
+    CGPoint tapPoint  = [touch locationInView:self.arSceneView];//该点就是手指的点击位置
+    
+    NSDictionary *hitTestOptions = [NSDictionary dictionaryWithObjectsAndKeys:@(true),SCNHitTestBoundingBoxOnlyKey, nil];
+    
+    NSArray<SCNHitTestResult *> * results= [self.arSceneView hitTest:tapPoint options:hitTestOptions];
+    for (SCNHitTestResult *res in results)
+    {
+        NSLog(@"%@", res);
+    }
+    
     
 }
 
