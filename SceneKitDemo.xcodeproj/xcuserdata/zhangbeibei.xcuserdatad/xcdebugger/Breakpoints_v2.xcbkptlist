@@ -29,61 +29,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SceneKitDemo/ARSCNTools.m"
-            timestampString = "546245334.510451"
+            filePath = "SceneKitDemo/Show3DViewController.m"
+            timestampString = "546493716.433134"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "+addMaterialsForGeometry:sourcePath:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "+[ARSCNTools addMaterialsForGeometry:sourcePath:]"
-                  moduleName = "SceneKitDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zhangbeibei/Documents/GomePlusProject/SceneKitDemo/SceneKitDemo/ARSCNTools.m"
-                  timestampString = "546245334.53113"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "572">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "+[ARSCNTools addMaterialsForGeometry:sourcePath:]"
-                  moduleName = "SceneKitDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zhangbeibei/Documents/GomePlusProject/SceneKitDemo/SceneKitDemo/ARSCNTools.m"
-                  timestampString = "546245334.532694"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "588">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SceneKitDemo/ARSCNTools.m"
-            timestampString = "546245334.51051"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "+addMaterialsForGeometry:sourcePath:"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -94,28 +46,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SceneKitDemo/ARSCNTools.m"
-            timestampString = "546245334.510548"
+            timestampString = "546493716.4331861"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "+addMaterialsForNode:sourcePath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SceneKitDemo/ARSCNTools.m"
+            timestampString = "546493716.4332221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
             endingLineNumber = "32"
             landmarkName = "+addMaterialsForGeometry:sourcePath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SceneKitDemo/Show3DViewController.m"
-            timestampString = "546245342.192933"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
