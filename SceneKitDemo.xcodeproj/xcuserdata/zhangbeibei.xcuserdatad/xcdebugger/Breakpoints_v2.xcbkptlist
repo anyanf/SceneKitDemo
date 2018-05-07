@@ -30,7 +30,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SceneKitDemo/Show3DViewController.m"
-            timestampString = "546493716.433134"
+            timestampString = "547369160.8533289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -46,23 +46,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SceneKitDemo/ARSCNTools.m"
-            timestampString = "546493716.4331861"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "+addMaterialsForNode:sourcePath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SceneKitDemo/ARSCNTools.m"
-            timestampString = "546493716.4332221"
+            timestampString = "547373063.982605"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
