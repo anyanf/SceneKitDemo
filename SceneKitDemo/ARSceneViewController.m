@@ -31,8 +31,10 @@ ARSessionDelegate
 
 #endif
 
+
 @property (nonatomic, strong)SCNNode *planeNode;
 
+@property (nonatomic, strong)ARPlaneAnchor *planeAnchor;
 
 @end
 
@@ -40,6 +42,8 @@ ARSessionDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"正在识别平面...可移动屏幕";
     // Do any additional setup after loading the view.
 }
 
@@ -229,10 +233,33 @@ ARSessionDelegate
     //3.自动刷新灯光（3D游戏用到，此处可忽略）
     _arSceneView.automaticallyUpdatesLighting = YES;
     
+    
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [_arSceneView addGestureRecognizer:tapGes];
+    
     return _arSceneView;
 }
 
+- (void)handleTap:(UITapGestureRecognizer *)tap
+{
+    [self addSceneNodeToNode:self.planeNode postion:SCNVector3Make(self.planeAnchor.center.x, 0, self.planeAnchor.center.z)];
+    self.navigationItem.title = @"";
+}
 
+- (void)addSceneNodeToNode:(SCNNode *)node postion:(SCNVector3)postion
+{
+    //1.创建一个场景
+    SCNScene *scene = [SCNScene sceneNamed:@"DELL_bijiben_4669885.scnassets/DELL_bijiben_4669885.obj"];
+    //2.获取节点 所有的场景有且只有一个根节点，其他所有节点都是根节点的子节点
+    [ARSCNTools addMaterialsForNode:scene.rootNode
+                         sourcePath:@"DELL_bijiben_4669885.scnassets/config.json"];
+    //4.设置节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置，也就是相机位置
+    scene.rootNode.position = postion;
+    
+    //5.将节点添加到当前屏幕中
+    //!!!此处一定要注意：节点是添加到代理捕捉到的节点中，而不是AR试图的根节点。因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
+    [node addChildNode:scene.rootNode];
+}
 
 #pragma mark -- ARSCNViewDelegate
 
@@ -247,42 +274,30 @@ ARSessionDelegate
     
     if (@available(iOS 11.0, *)) {
         if ([anchor isMemberOfClass:[ARPlaneAnchor class]]) {
-            NSLog(@"捕捉到平地");
-            
-            //添加一个3D平面模型，ARKit只有捕捉能力，锚点只是一个空间位置，要想更加清楚看到这个空间，我们需要给空间添加一个平地的3D模型来渲染他
-            
-            //1.获取捕捉到的平地锚点
-            ARPlaneAnchor *planeAnchor = (ARPlaneAnchor *)anchor;
-            //2.创建一个3D物体模型    （系统捕捉到的平地是一个不规则大小的长方形，这里笔者将其变成一个长方形，并且是否对平地做了一个缩放效果）
-            //参数分别是长宽高和圆角
-//            SCNBox *plane = [SCNBox boxWithWidth:planeAnchor.extent.x*0.3 height:0 length:planeAnchor.extent.x*0.3 chamferRadius:0];
-//            //3.使用Material渲染3D模型（默认模型是白色的，这里笔者改成红色）
-//            plane.firstMaterial.diffuse.contents = [UIColor redColor];
-//
-//            //4.创建一个基于3D物体模型的节点
-//            SCNNode *planeNode = [SCNNode nodeWithGeometry:plane];
-//            //5.设置节点的位置为捕捉到的平地的锚点的中心位置  SceneKit框架中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
-//            planeNode.position =SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
-//
-//            //self.planeNode = planeNode;
-//            [node addChildNode:planeNode];
-            
-            
-            //2.当捕捉到平地时，开始在平地上添加一个3D模型
-            
-            //1.创建一个花瓶场景
-            SCNScene *scene = [SCNScene sceneNamed:@"DELL_bijiben_4669885.scnassets/DELL_bijiben_4669885.obj"];
-            //2.获取花瓶节点（一个场景会有多个节点，此处我们只写，花瓶节点则默认是场景子节点的第一个）
-            //所有的场景有且只有一个根节点，其他所有节点都是根节点的子节点
-            SCNNode *vaseNode = scene.rootNode.childNodes[0];
-            [ARSCNTools addMaterialsForGeometry:vaseNode.geometry
-                                     sourcePath:@"DELL_bijiben_4669885.scnassets/config.json"];
-            //4.设置花瓶节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置，也就是相机位置
-            vaseNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
-            
-            //5.将花瓶节点添加到当前屏幕中
-            //!!!此处一定要注意：花瓶节点是添加到代理捕捉到的节点中，而不是AR试图的根节点。因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
-            [node addChildNode:vaseNode];
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                NSLog(@"捕捉到平地");
+                
+                //添加一个3D平面模型，ARKit只有捕捉能力，锚点只是一个空间位置，要想更加清楚看到这个空间，我们需要给空间添加一个平地的3D模型来渲染他
+                
+                //1.获取捕捉到的平地锚点
+                ARPlaneAnchor *planeAnchor = (ARPlaneAnchor *)anchor;
+                //2.创建一个3D物体模型    （系统捕捉到的平地是一个不规则大小的长方形，这里将其变成一个长方形，并且是否对平地做了一个缩放效果）
+                //参数分别是长宽高和圆角
+                SCNBox *plane = [SCNBox boxWithWidth:planeAnchor.center.x * 0.5 height:0 length:planeAnchor.center.z * 0.5 chamferRadius:0];
+                plane.firstMaterial.diffuse.contents = [UIColor colorWithWhite:1.0 alpha:0.5];
+                
+                //4.创建一个基于3D物体模型的节点
+                SCNNode *planeNode = [SCNNode nodeWithGeometry:plane];
+                //5.设置节点的位置为捕捉到的平地的锚点的中心位置  SceneKit框架中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
+                planeNode.position =SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
+                [node addChildNode:planeNode];
+
+                self.planeNode = node;
+                self.planeAnchor = planeAnchor;
+                //2.当捕捉到平地时 提示点击屏幕可以添加物体
+                self.navigationItem.title = @"点击屏幕可放置物体";
+            });
         }
     }
 }

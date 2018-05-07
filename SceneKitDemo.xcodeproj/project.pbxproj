@@ -16,6 +16,7 @@
 		FD151FC21F41BBA80077A3A2 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD151FC11F41BBA80077A3A2 /* SceneKit.framework */; };
 		FD217B631F5511C90052F6DF /* ARViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD217B621F5511C90052F6DF /* ARViewController.m */; };
 		FD2936EB1F6B80210046DF59 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FD2936EA1F6B80210046DF59 /* Models.scnassets */; };
+		FD2F5F702092D23200759CFA /* xiyiji.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FD2F5F6F2092D23100759CFA /* xiyiji.scnassets */; };
 		FD6D72951F45634D002CED1B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D72941F45634D002CED1B /* RootViewController.m */; };
 		FD6D72971F457B3F002CED1B /* house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD6D72961F457B3F002CED1B /* house.jpg */; };
 		FD91D9FA207C97E100AE0B94 /* DELL_bijiben_4669885.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FD91D9F9207C97E000AE0B94 /* DELL_bijiben_4669885.scnassets */; };
@@ -43,6 +44,7 @@
 		FD217B611F5511C90052F6DF /* ARViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARViewController.h; sourceTree = "<group>"; };
 		FD217B621F5511C90052F6DF /* ARViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARViewController.m; sourceTree = "<group>"; };
 		FD2936EA1F6B80210046DF59 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
+		FD2F5F6F2092D23100759CFA /* xiyiji.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = xiyiji.scnassets; sourceTree = "<group>"; };
 		FD6D72931F45634D002CED1B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		FD6D72941F45634D002CED1B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		FD6D72961F457B3F002CED1B /* house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = house.jpg; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		FD151FA81F41BA880077A3A2 /* SceneKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FD2F5F6F2092D23100759CFA /* xiyiji.scnassets */,
 				FD91DA05207EF95500AE0B94 /* Jixieshi_bijiben_11159963509_V1_dae.scnassets */,
 				FD91DA03207DFB1F00AE0B94 /* MeiLing_bingxiang_4360469.scnassets */,
 				FD91D9F9207C97E000AE0B94 /* DELL_bijiben_4669885.scnassets */,
@@ -204,6 +207,7 @@
 				FD91DA06207EF95500AE0B94 /* Jixieshi_bijiben_11159963509_V1_dae.scnassets in Resources */,
 				FD91DA04207DFB1F00AE0B94 /* MeiLing_bingxiang_4360469.scnassets in Resources */,
 				FD91D9FA207C97E100AE0B94 /* DELL_bijiben_4669885.scnassets in Resources */,
+				FD2F5F702092D23200759CFA /* xiyiji.scnassets in Resources */,
 				FD151FB91F41BA880077A3A2 /* LaunchScreen.storyboard in Resources */,
 				FD6D72971F457B3F002CED1B /* house.jpg in Resources */,
 				FD151FB61F41BA880077A3A2 /* Assets.xcassets in Resources */,

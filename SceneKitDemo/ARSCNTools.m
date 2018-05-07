@@ -29,7 +29,8 @@
             if ([material.name isEqualToString:dict[@"mtlname"]])
             {
                 NSString *strImgName = dict[@"albedo"];
-                material.diffuse.contents = [UIImage imageNamed:[NSString stringWithFormat:@"DELL_bijiben_4669885.scnassets/%@",strImgName]];
+                UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"xiyiji.scnassets/%@",strImgName]];
+                material.diffuse.contents = img;
                 break;
             }
         }

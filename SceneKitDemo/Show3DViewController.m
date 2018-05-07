@@ -37,8 +37,15 @@
     [self.view addSubview:_scnView];
     
     /// 加载资源，如果是scn格式的，需要有对应的png图片
-    _scnView.scene = [SCNScene sceneNamed:@"MeiLing_bingxiang_4360469.scnassets/MeiLing_bingxiang_4360469.DAE"];
+    _scnView.scene = [SCNScene sceneNamed:@"xiyiji.scnassets/moxing.obj"];
 
+
+//    SCNNode *node = [_scnView.scene.rootNode.childNodes objectAtIndex:0];
+//
+//    SCNGeometry *geometry = node.geometry;
+    /// 为材质贴图
+    [ARSCNTools addMaterialsForNode:_scnView.scene.rootNode sourcePath:@"xiyiji.scnassets/config.json"];
+    
     // 外围光
     SCNNode *ambientLightNode = [SCNNode node];
     ambientLightNode.light = [SCNLight light];
@@ -51,12 +58,6 @@
     _cameraNode.camera = [SCNCamera camera];
     _cameraNode.position = SCNVector3Make(0, 0, 20);
     [_scnView.scene.rootNode addChildNode:_cameraNode];
-    
-    SCNNode *node = [_scnView.scene.rootNode.childNodes objectAtIndex:0];
-    
-    SCNGeometry *geometry = node.geometry;
-    /// 为材质贴图
-    [ARSCNTools addMaterialsForNode:node sourcePath:@"MeiLing_bingxiang_4360469.scnassets/config.json"];
     
     [self.scnView startCustomInterActive];
 }
