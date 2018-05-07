@@ -108,23 +108,34 @@ SCNVector3 oldPosition;
         SCNVector3 worldPoint = [self unprojectPoint:vpWithZ];
 
 
-        if (gesture.state == UIGestureRecognizerStateBegan)
-        {
-            oldPoint = worldPoint;
-            oldPosition = worldPoint;
-        }
-        else
-        {
-            SCNVector3 point = SCNVector3Make(worldPoint.x - oldPoint.x,
-                                              worldPoint.y - oldPoint.y,
-                                              worldPoint.z - oldPoint.z);
-            
-            self.scene.rootNode.position = SCNVector3Make( self.scene.rootNode.position.x + translation.x,
-                                                           self.scene.rootNode.position.y + translation.y,
-                                                           self.scene.rootNode.position.z);
-            
+//        if (gesture.state == UIGestureRecognizerStateBegan)
+//        {
+//            oldPoint = worldPoint;
+////            oldPosition = worldPoint;
+//        }
+//        else
+//        {
+//            SCNVector3 point = SCNVector3Make(worldPoint.x - oldPoint.x,
+//                                              worldPoint.y - oldPoint.y,
+//                                              worldPoint.z - oldPoint.z);
+//
+//            self.scene.rootNode.position = point;
+//
+//
+        //        }
+        
+        NSLog(@"%f  %f ", translation.x, translation.y);
 
-        }
+        NSLog(@"%f  %f  %f", worldPoint.x, worldPoint.y, worldPoint.z);
+        
+        CGPoint location = [gesture locationInView:self];
+        SCNVector3 worldLocationPoint = [self unprojectPoint:SCNVector3Make(location.x,
+                                                                    location.y,
+                                                                    projectedOrigin.z)];
+
+        
+        self.scene.rootNode.position = worldLocationPoint;
+
         
     }
     else
