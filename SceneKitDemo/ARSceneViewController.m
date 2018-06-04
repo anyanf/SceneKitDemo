@@ -46,6 +46,9 @@ ARSessionDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor blackColor];
+    
+    
     self.navigationItem.title = @"正在识别平面...可移动屏幕";
     // Do any additional setup after loading the view.
 }
