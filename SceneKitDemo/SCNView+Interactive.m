@@ -100,69 +100,69 @@ SCNVector3 oldPosition;
     CGPoint translation = [gesture locationInView:self];
     
     
-//    if (gesture.numberOfTouches == 2)
-//    {
-//        [[self motionManager] stopDeviceMotionUpdates];
-//
-//        CGPoint translation = [gesture locationInView:self];
-//
-//        SCNVector3 projectedOrigin = [self projectPoint:SCNVector3Zero];
-//        SCNVector3 vpWithZ = SCNVector3Make(translation.x, translation.y, projectedOrigin.z);
-//        SCNVector3 worldPoint = [self unprojectPoint:vpWithZ];
-//        self.scene.rootNode.position = worldPoint;
-//
-//
-//
-//        if (gesture.state == UIGestureRecognizerStateBegan)
-//        {
-//            oldPoint = worldPoint;
-//            oldPosition = worldPoint;
-//        }
-//        else
-//        {
-//            SCNVector3 point = SCNVector3Make(worldPoint.x - oldPoint.x,
-//                                              worldPoint.y - oldPoint.y,
-//                                              worldPoint.z - oldPoint.z);
-//
-////            self.scene.rootNode.position = point;
-//
-////            SCNAction *action = [SCNAction moveTo:point duration:0.0];
-////            [self.scene.rootNode runAction:action];
-//        }
-//
-//    }
-//    else
-//    {
-//        [[self motionManager] stopDeviceMotionUpdates];
-//
-//        CGPoint translation = [gesture translationInView:self];
-//        CGFloat absX = fabs(translation.x);
-//        CGFloat absY = fabs(translation.y);
-//
-//        if (absX > absY)
-//        {
-//            CGFloat newAngle = -(CGFloat)translation.x * (CGFloat)M_PI / 180.0 * self.gestureRotateFactor.floatValue;
-//
-//            [self modifyingNodePivot:newAngle rotateX:0 rotateY:1 rotateZ:0];
-//
-//            if (gesture.state == UIGestureRecognizerStateEnded)
-//            {
-//                [self startDeviceMotionUpdates];
-//            }
-//        }
-//        else
-//        {
-//            CGFloat newAngle = (CGFloat)translation.y * (CGFloat)M_PI / 180.0 * self.gestureRotateFactor.floatValue;
-//
-//            [self modifyingNodeTransform:newAngle rotateX:1 rotateY:0 rotateZ:0];
-//
-//            if (gesture.state == UIGestureRecognizerStateEnded)
-//            {
-//                [self startDeviceMotionUpdates];
-//            }
-//        }
-//    }
-//
+    if (gesture.numberOfTouches == 2)
+    {
+        [[self motionManager] stopDeviceMotionUpdates];
+
+        CGPoint translation = [gesture locationInView:self];
+
+        SCNVector3 projectedOrigin = [self projectPoint:SCNVector3Zero];
+        SCNVector3 vpWithZ = SCNVector3Make(translation.x, translation.y, projectedOrigin.z);
+        SCNVector3 worldPoint = [self unprojectPoint:vpWithZ];
+        self.scene.rootNode.position = worldPoint;
+
+
+
+        if (gesture.state == UIGestureRecognizerStateBegan)
+        {
+            oldPoint = worldPoint;
+            oldPosition = worldPoint;
+        }
+        else
+        {
+            SCNVector3 point = SCNVector3Make(worldPoint.x - oldPoint.x,
+                                              worldPoint.y - oldPoint.y,
+                                              worldPoint.z - oldPoint.z);
+
+//            self.scene.rootNode.position = point;
+
+//            SCNAction *action = [SCNAction moveTo:point duration:0.0];
+//            [self.scene.rootNode runAction:action];
+        }
+
+    }
+    else
+    {
+        [[self motionManager] stopDeviceMotionUpdates];
+
+        CGPoint translation = [gesture translationInView:self];
+        CGFloat absX = fabs(translation.x);
+        CGFloat absY = fabs(translation.y);
+
+        if (absX > absY)
+        {
+            CGFloat newAngle = -(CGFloat)translation.x * (CGFloat)M_PI / 180.0 * self.gestureRotateFactor.floatValue;
+
+            [self modifyingNodePivot:newAngle rotateX:0 rotateY:1 rotateZ:0];
+
+            if (gesture.state == UIGestureRecognizerStateEnded)
+            {
+                [self startDeviceMotionUpdates];
+            }
+        }
+        else
+        {
+            CGFloat newAngle = (CGFloat)translation.y * (CGFloat)M_PI / 180.0 * self.gestureRotateFactor.floatValue;
+
+            [self modifyingNodeTransform:newAngle rotateX:1 rotateY:0 rotateZ:0];
+
+            if (gesture.state == UIGestureRecognizerStateEnded)
+            {
+                [self startDeviceMotionUpdates];
+            }
+        }
+    }
+
 }
 
 - (void)modifyingNodeTransform:(CGFloat)newAngle rotateX:(float)rotateX rotateY:(float)rotateY rotateZ:(float)rotateZ

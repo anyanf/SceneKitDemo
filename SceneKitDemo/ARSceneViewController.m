@@ -306,10 +306,12 @@ ARSessionDelegate
                 //4.创建一个基于3D物体模型的节点
                 SCNNode *planeNode = [SCNNode nodeWithGeometry:plane];
                 //5.设置节点的位置为捕捉到的平地的锚点的中心位置  SceneKit框架中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
-                planeNode.position =SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
+                planeNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
                 [node addChildNode:planeNode];
                 
                 self.planeNode = node;
+                
+                /// 获取到的平地锚点
                 self.planeAnchor = planeAnchor;
                 //2.当捕捉到平地时 提示点击屏幕可以添加物体
                 self.navigationItem.title = @"点击屏幕可放置物体";
@@ -379,14 +381,57 @@ ARSessionDelegate
     
     CGPoint tapPoint  = [touch locationInView:self.arSceneView];//该点就是手指的点击位置
     
-    NSDictionary *hitTestOptions = [NSDictionary dictionaryWithObjectsAndKeys:@(true),SCNHitTestBoundingBoxOnlyKey, nil];
+    NSArray *results = [self.arSceneView hitTest:tapPoint types:ARHitTestResultTypeExistingPlaneUsingExtent];
+    ARHitTestResult *hitResult = [results firstObject];
     
-    NSArray<SCNHitTestResult *> * results= [self.arSceneView hitTest:tapPoint options:hitTestOptions];
-    for (SCNHitTestResult *res in results)
-    {
-        NSLog(@"%f, %f, %f", res.localCoordinates.x, res.localCoordinates.y, res.localCoordinates.z);
-        self.sceneReal.rootNode.position = res.localCoordinates;
+    float x = hitResult.localTransform.columns[3].x;
+    float y = hitResult.localTransform.columns[3].y;
+    float z = hitResult.localTransform.columns[3].z;
+    
+    
+    if (x == 0 && y == 0 && z == 0) {
+        return;
     }
+    
+    if (x <  -self.planeAnchor.extent.x * 0.5)
+    {
+        x =  -self.planeAnchor.extent.x * 0.5;
+    }
+    else if (x > self.planeAnchor.extent.x * 0.5)
+    {
+        x = self.planeAnchor.extent.x * 0.5;
+    }
+    
+    if (y <  -self.planeAnchor.extent.y * 0.5)
+    {
+        y =  -self.planeAnchor.extent.y * 0.5;
+    }
+    else if (y > self.planeAnchor.extent.y * 0.5)
+    {
+        y = self.planeAnchor.extent.y * 0.5;
+    }
+    
+    if (z <  -self.planeAnchor.extent.z * 0.5)
+    {
+        z = -self.planeAnchor.extent.z * 0.5;
+    }
+    else if (z > self.planeAnchor.extent.z * 0.5)
+    {
+        z = self.planeAnchor.extent.z * 0.5;
+    }
+    
+    self.sceneReal.rootNode.position = SCNVector3Make(x, y, z);
+    NSLog(@"%f, %f, %f", x, y, z);
+    
+//    NSDictionary *hitTestOptions = [NSDictionary dictionaryWithObjectsAndKeys:@(true),SCNHitTestBoundingBoxOnlyKey, nil];
+//
+//    NSArray<SCNHitTestResult *> * results= [self.arSceneView hitTest:tapPoint options:hitTestOptions];
+//    for (SCNHitTestResult *res in results)
+//    {
+//        NSLog(@"%@",res.node);
+//        NSLog(@"%f, %f, %f", res.worldCoordinates.x, res.worldCoordinates.y, res.worldCoordinates.z);
+//        self.sceneReal.rootNode.position = res.worldCoordinates;
+//    }
     
     
 }

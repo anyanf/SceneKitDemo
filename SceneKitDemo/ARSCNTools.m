@@ -19,6 +19,9 @@
     /// 配置数据里取出所有材质数据
     NSArray *aryMaterialDatas = [dictData objectForKey:@"materials"];
     
+    NSRange range = [strSourcePath rangeOfString:@"/"];
+    NSString *strImgPath = [strSourcePath substringToIndex:range.location];
+    
     NSMutableArray *maryMaterials = [[NSMutableArray alloc] init];
     
     for (SCNMaterial *material in geometry.materials)
@@ -29,7 +32,7 @@
             if ([material.name isEqualToString:dict[@"mtlname"]])
             {
                 NSString *strImgName = dict[@"albedo"];
-                UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"DELL_bijiben_4669885.scnassets/%@",strImgName]];
+                UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"%@/%@",strImgPath, strImgName]];
                 material.diffuse.contents = img;
                 break;
             }
