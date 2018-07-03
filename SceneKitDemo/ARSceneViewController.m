@@ -29,7 +29,7 @@ ARSessionDelegate
 //会话追踪配置：负责追踪相机的运动
 @property(nonatomic,strong)ARWorldTrackingConfiguration *arSessionConfiguration;
 
-
+/// real scene
 @property (nonatomic, strong) SCNScene *sceneReal;
 
 #endif
